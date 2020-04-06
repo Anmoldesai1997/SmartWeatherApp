@@ -14,7 +14,7 @@ button.addEventListener('click', function (name) {
             var feelsliketempValue = data['main']['feels_like'];
             var tempmin = data['main']['temp_min'];
             var tempmax = data['main']['temp_max'];
-
+            var id = data['weather']['id'];
             var latitude = data['coord']['lon'];
             var longitude = data['coord']['lat'];
             var nameValue = data['name'];
@@ -31,12 +31,39 @@ button.addEventListener('click', function (name) {
             var country = data['sys']['country'];
             var visibilityval = data['visibility'];
             var timezone = data['timezone'];
+            var activity="";
+            var mode_of_transport = "";
+            var severe_weather = false;
+            //activity 
+            if(id==800){
+                activity = " running, walks, sport activities, picnics ";
+            }
+            if((id>=600&&id<=622)||(id>=500&&id<=531)){
+                activity = " Netflix and chill, TV shows, board games ";
+            }
+            if(id==300||id==301){
+                activity = " Preferably indoor, but can manage to play football or cricket. ";
+            }
+            //mode of transport
+            if ((feelsliketempValue<277||feelsliketempValue>310k)||(windspeed>15&&descValue!='severe')) {
+                mode_of_transport ='car';
+            }
+            else if((feelsliketempValue>277&&windspeed<15)||(feelsliketempValue<310&&humValue<30)){
+                mode_of_transport =" car or bike ";
+            }
+            else if(windspeed&&humValue){
+                mode_of_transport = " walk or bike ";
+            }
 
-
+            //severe weather notification
+            if(feels_like<277&&windspeed>24&&visibility<100){
+                severe_weather = true;
+            }
             main.innerHTML = nameValue;
             desc.innerHTML = "Desc - " + descValue;
             temp.innerHTML = "Temp - " + tempValue;
             input.value = "";
+            }
 
         })
 
