@@ -34,6 +34,9 @@ button.addEventListener('click', function (name) {
             var activity="";
             var mode_of_transport = "";
             var severe_weather = false;
+            var daily_day_temp = data['daily']['temp']['day'];
+            var daily_min_temp = data['daily']['temp']['min'];
+            var daily_max_temp = data['daily']['temp']['max'];
             //activity 
             if(id==800){
                 activity = " running, walks, sport activities, picnics ";
