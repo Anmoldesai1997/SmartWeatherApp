@@ -9,7 +9,7 @@ button.addEventListener("click", function (name) {
   fetch(
     "https://api.openweathermap.org/data/2.5/weather?q=" +
       input.value +
-      "&appid=e9fae9a5139dedd5fb23d5fa0187c018"
+      "&units=metric&appid=e9fae9a5139dedd5fb23d5fa0187c018"
   )
     .then((response) => response.json())
     .then((data) => {
@@ -104,10 +104,10 @@ button.addEventListener("click", function (name) {
     .then((response) => response.json())
     .then((data) => {
       var daily_day_temp = data.daily[0].temp.day;
-      var daily_min_temp = data.daily[3].temp.min;
-      var daily_max_temp = data.daily[3].temp.max;
-      var daily_mor_temp = data.daily[3].temp.morn;
-      var daily_eve_temp = data.daily[3].temp.eve;
+      var daily_min_temp = data.daily[0].temp.min;
+      var daily_max_temp = data.daily[0].temp.max;
+      var daily_mor_temp = data.daily[0].temp.morn;
+      var daily_eve_temp = data.daily[0].temp.eve;
       dayy.innerHTML =
         "Daily temp = " +
         daily_day_temp +
