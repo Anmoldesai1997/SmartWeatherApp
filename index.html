@@ -6,6 +6,31 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>OpenWeatherMap Api</title>
   <link rel="stylesheet" href="style.css">
+  <script src="bundle.js"></script>
+  <script>
+      var geocoder;
+      var NodeGeocoder = require('node-geocoder');
+      var options={
+	    provider: 'google',
+	    httpAdapter: 'https',
+	    apiKey:'AIzaSyAGVEe14FpAXvLYF-d0BOxannqcSZrrCFw',
+	    formatter: 'json'
+	    };
+      var geocoder = NodeGeocoder(options);
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
+      }
+      //Get the latitude and the longitude;
+      function successFunction(position) {
+      var lat = position.coords.latitude;
+      var lng = position.coords.longitude;
+	    geocoder.reverse({lat:lat, lon:lng}, function(err, res) {document.getElementById("loc_box").value =res[0].city
+      });
+      }
+      function errorFunction(){
+        alert("Geocoder failed");
+      }
+  </script>
 </head>
 <body>
   <!-- <div class="main">
@@ -15,7 +40,7 @@
     </div> -->
   
     <div class="input">
-      <input type="text" placeholder="Enter the city" class="input_text">
+      <input id="loc_box" type="text" placeholder="Enter the city" class="input_text">
       <input type="submit" value="Submit" class="submit">
     </div>
   </div>
