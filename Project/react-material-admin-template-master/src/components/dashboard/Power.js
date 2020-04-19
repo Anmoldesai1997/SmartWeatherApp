@@ -7,7 +7,7 @@ import {typography} from 'material-ui/styles';
 const styles = {
   paper: {
     backgroundColor: orange500,
-    height: 500
+    height: 350
   },
   header: {
     fontSize: 24,
@@ -33,11 +33,22 @@ class Power extends Component {
  
   constructor(props){
     super(props);
+
+    this.googleMapRef = null;
+
+    this.setgoogleMapRef = element => {
+      this.googleMapRef = element;
+    };
+
+
+
     this.state = {
       desiredTemperature: 0, height: 3, area: 30, feelsLike: 10, tempDiff: 0, energy: 0, HVAC: 1000, time: 0, verdict: ""
     };
   }
   componentDidMount(){
+
+  
 
     fetch('https://api.openweathermap.org/data/2.5/weather?q=' + 'Raleigh' + '&appid=e9fae9a5139dedd5fb23d5fa0187c018')
     .then(results => {
@@ -51,7 +62,9 @@ class Power extends Component {
       
     })
   }
-    
+  
+
+
 
   takeTemp(event)
   {
@@ -83,12 +96,13 @@ class Power extends Component {
   }
   render() {
     return(
+     
       <Paper style={styles.paper}>
         <div>
         <div style={{...styles.header}}>Power Consumption</div>
 
         <div style={{...styles.body}}>Please enter Desired Temperature(°C)</div>
-        <input style={{marginLeft:12}} type="text" value={this.state.DT} onChange={e => this.takeTemp(e)}/></div>
+        <input style={{marginLeft:12}} type="text" value={this.state.DT} onChange={e => this.takeTemp(e)}/>
 
         <div style={{...styles.body}}>Please enter Room Height(m).</div>
         <input style={{marginLeft:12}} type="text" value={this.state.HT} onChange={e => this.takeHeight(e)}/>
@@ -100,7 +114,10 @@ class Power extends Component {
         <input style={{marginLeft:12}} type="text" value={this.state.WD} onChange={e => this.takeWattage(e)}/>  
 
         <div style={{...styles.body}}> {this.state.verdict} {this.state.time} mins </div>
+        </div>
       </Paper>
+
+
     )
   }
 }
