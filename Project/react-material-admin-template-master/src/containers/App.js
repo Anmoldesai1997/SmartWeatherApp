@@ -45,7 +45,7 @@ class App extends React.Component {
     var sunSet = data["sys"]["sunset"];
     var sunRise = data["sys"]["sunrise"];
       
-    if(now>sunSet && now<sunRise)
+    if(now>sunSet || now<sunRise)
       this.setState({isNight: true})
     else
       this.setState({isNight: false})
