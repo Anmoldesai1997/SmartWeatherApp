@@ -1,112 +1,126 @@
-import React, {Component} from 'react';
-import {cyan600, purple600, orange600, pink600} from 'material-ui/styles/colors';
-import Assessment from 'material-ui/svg-icons/maps/map';
-import Face from 'material-ui/svg-icons/image/dehaze';
-import ThumbUp from 'material-ui/svg-icons/file/cloud';
+import React, { Component } from "react";
+import {
+  cyan600,
+  purple600,
+  orange600,
+  pink600,
+} from "material-ui/styles/colors";
+import Assessment from "material-ui/svg-icons/maps/map";
+import Face from "material-ui/svg-icons/image/dehaze";
+import ThumbUp from "material-ui/svg-icons/file/cloud";
 
-import InfoBox from '../components/dashboard/InfoBox';
-import NewOrders from '../components/dashboard/NewOrders';
+import InfoBox from "../components/dashboard/InfoBox";
+import NewOrders from "../components/dashboard/NewOrders";
 //import ShoppingCart from 'material-ui/svg-icons/image/brightness-4';
-import ShoppingCart from 'material-ui/svg-icons/image/wb-sunny';
-import BrowserUsage from '../components/dashboard/BrowserUsage';
-import Future from '../components/dashboard/Future';
-import Power from '../components/dashboard/Power';
-import Email from '../components/dashboard/Email';
-import Remote from '../components/dashboard/Remote';
+import ShoppingCart from "material-ui/svg-icons/image/wb-sunny";
+import BrowserUsage from "../components/dashboard/BrowserUsage";
+import Future from "../components/dashboard/Future";
+import Power from "../components/dashboard/Power";
+import Email from "../components/dashboard/Email";
+import Remote from "../components/dashboard/Remote";
 //import temp from './download.png'
-import Data from '../data';
+import Data from "../data";
 
 //const DashboardPage = () => {
 class DashboardPage extends Component {
-
-  
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      temp: "", humidity: "", city: "", wind: ""
+      temp: "",
+      humidity: "",
+      city: "",
+      wind: "",
     };
   }
 
-  componentDidMount(){
-    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + 'Raleigh' + '&appid=e9fae9a5139dedd5fb23d5fa0187c018')
-    .then(results => {
-     // console.log(results.json());
-      return results.json();
-    }).then(data => {
-      var tempValue = Math.round(data["main"]["temp"]-273)+'°C';
-      var windspeed = data["wind"]["speed"]+'m/s';
-      var humidity = data["main"]["humidity"]+'%';
-      
-     var name = data["name"]
-     this.setState({temp: tempValue, humidity: humidity, city: name, wind: windspeed})
-      
-    })
+  componentDidMount() {
+    fetch(
+      "https://api.openweathermap.org/data/2.5/weather?q=" +
+        "Iselin" +
+        "&appid=e9fae9a5139dedd5fb23d5fa0187c018"
+    )
+      .then((results) => {
+        // console.log(results.json());
+        return results.json();
+      })
+      .then((data) => {
+        var tempValue = Math.round(data["main"]["temp"] - 273) + "°C";
+        var windspeed = data["wind"]["speed"] + "m/s";
+        var humidity = data["main"]["humidity"] + "%";
+
+        var name = data["name"];
+        this.setState({
+          temp: tempValue,
+          humidity: humidity,
+          city: name,
+          wind: windspeed,
+        });
+      });
   }
 
-  render(){
+  render() {
     return (
-      <div >
-        
-
+      <div>
         <div className="row">
-
           <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3 m-b-15 ">
-          <InfoBox  Icon={ShoppingCart}
-                    color={pink600}
-                    title="Temperature"
-                    value={this.state.temp}
-            />
-          </div>
-
-
-          <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3 m-b-15 ">
-            <InfoBox Icon={ThumbUp}
-                    color={cyan600}
-                    title="Humidity"
-                    value={this.state.humidity}
+            <InfoBox
+              Icon={ShoppingCart}
+              color={pink600}
+              title="Temperature"
+              value={this.state.temp}
             />
           </div>
 
           <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3 m-b-15 ">
-            <InfoBox Icon={Assessment}
-                    color={purple600}
-                    title="City"
-                    value={this.state.city}
+            <InfoBox
+              Icon={ThumbUp}
+              color={cyan600}
+              title="Humidity"
+              value={this.state.humidity}
             />
           </div>
 
           <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3 m-b-15 ">
-            <InfoBox Icon={Face}
-                    color={orange600}
-                    title="Wind"
-                    value={this.state.wind}
+            <InfoBox
+              Icon={Assessment}
+              color={purple600}
+              title="City"
+              value={this.state.city}
+            />
+          </div>
+
+          <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3 m-b-15 ">
+            <InfoBox
+              Icon={Face}
+              color={orange600}
+              title="Wind"
+              value={this.state.wind}
             />
           </div>
         </div>
 
         <div className="row">
           <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-md m-b-15">
-            <NewOrders data={Data.dashBoardPage.newOrders}/>
+            <NewOrders data={Data.dashBoardPage.newOrders} />
           </div>
 
           <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-md m-b-15">
-            <Future data={Data.dashBoardPage.newOrders}/>
+            <Future data={Data.dashBoardPage.newOrders} />
           </div>
 
           <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-md m-b-15">
-            <Email data={Data.dashBoardPage.newOrders}/>
-          </div>
-
-
-          <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 m-b-15 ">
-            <BrowserUsage data={Data.dashBoardPage.browserUsage}/>
+            <Email data={Data.dashBoardPage.newOrders} />
           </div>
 
           <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 m-b-15 ">
-            <Remote data={Data.dashBoardPage.browserUsage}/>
+            <BrowserUsage data={Data.dashBoardPage.browserUsage} />
+          </div>
+
+          <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 m-b-15 ">
+            <Remote data={Data.dashBoardPage.browserUsage} />
           </div>
           <div className="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-md m-b-15">
-            <Power data={Data.dashBoardPage.newOrders}/>
+            <Power data={Data.dashBoardPage.newOrders} />
           </div>
         </div>
       </div>
@@ -115,7 +129,6 @@ class DashboardPage extends Component {
 }
 
 export default DashboardPage;
-
 
 // import React from 'react';
 // import {cyan600, pink600, purple600, orange600} from 'material-ui/styles/colors';
@@ -146,7 +159,6 @@ export default DashboardPage;
 //                    value="1500k"
 //           />
 //         </div>
-
 
 //         <div className="col-xs-12 col-sm-6 col-md-3 col-lg-3 m-b-15 ">
 //           <InfoBox Icon={ThumbUp}
